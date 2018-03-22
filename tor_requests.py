@@ -2,6 +2,7 @@ import socks
 import socket
 import requests 
 import threading
+import copy
 from stem import Signal
 from stem.control import Controller
 
@@ -63,7 +64,7 @@ def get_html(urls, searchnum='all' , keywords=None):
     for url in urls:
         rawhtml = tor_get(url).text
         if keywords:
-            kwlist, kwlistlen = keywords, len(keywords)
+            kwlist, kwlistlen = copy.deepcopy(keywords), len(keywords)
             for line in rawhtml.split('\n'):
                 for kw in kwlist:
                     if kw in line:
